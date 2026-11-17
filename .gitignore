@@ -41,6 +41,12 @@ yarn-error.log*
 *.db
 *.db-journal
 
+# internal / planning
+TASKS.md
+.gemini/
+.cursor/
+.claude/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
