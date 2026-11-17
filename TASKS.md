@@ -8,7 +8,7 @@
 
 ### PHASE 1: Khởi tạo & Thiết kế Nền tảng
 - [x] **Task 1.1:** Khởi tạo cấu trúc dự án (Repo GitHub, Next.js 16 + TypeScript + Tailwind v4 + Core Packages), tạo file `ARCHITECTURE.md` và `TASKS.md`.
-- [ ] **Task 1.2:** Viết đầy đủ file `schema.prisma` theo đúng đặc tả ở Mục 4 và tạo file `seed.ts` (tạo sẵn 1 tiệm mẫu, 5 dịch vụ, 3 nhân viên, lịch làm việc 7 ngày và vài booking mẫu).
+- [x] **Task 1.2:** Viết đầy đủ file `schema.prisma` theo đúng đặc tả ở Mục 4 và tạo file `seed.ts` (tạo sẵn 1 tiệm mẫu, 5 dịch vụ, 3 nhân viên, lịch làm việc 7 ngày và vài booking mẫu).
 
 ### PHASE 2: Core Backend Engine (Trái tim của hệ thống)
 - [ ] **Task 2.1:** Viết hàm/module độc lập `getAvailableSlots(date, serviceIds, staffId?)` kèm kịch bản test/unit test chứng minh thuật toán không bị lỗi Overlap, tính đúng giờ nghỉ trưa và thời gian đệm (Buffer time).
