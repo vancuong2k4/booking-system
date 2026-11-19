@@ -7,9 +7,10 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx tests/availability.test.ts && tsx tests/booking-concurrency.test.ts",
+    "test": "tsx tests/availability.test.ts && tsx tests/booking-concurrency.test.ts && tsx tests/admin-api.test.ts",
     "test:availability": "tsx tests/availability.test.ts",
-    "test:booking": "tsx tests/booking-concurrency.test.ts"
+    "test:booking": "tsx tests/booking-concurrency.test.ts",
+    "test:admin": "tsx tests/admin-api.test.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.6",
