@@ -7,6 +7,8 @@ import prisma from "@/lib/prisma";
 import { endOfDay, startOfDay } from "date-fns";
 import { parseDateOnly } from "@/lib/date-utils";
 
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/bookings
  * Create an appointment with database transaction locking

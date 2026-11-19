@@ -3,6 +3,8 @@ import prisma from "@/lib/prisma";
 import { createServiceSchema } from "@/lib/validations";
 import { ZodError } from "zod";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/admin/services
  * List all services for administration

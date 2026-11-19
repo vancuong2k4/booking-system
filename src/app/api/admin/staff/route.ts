@@ -3,6 +3,8 @@ import prisma from "@/lib/prisma";
 import { createStaffSchema } from "@/lib/validations";
 import { ZodError } from "zod";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/admin/staff
  * List all staff members with their schedules

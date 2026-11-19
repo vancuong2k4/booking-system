@@ -3,6 +3,8 @@ import prisma from "@/lib/prisma";
 import { updateStaffSchedulesSchema } from "@/lib/validations";
 import { ZodError } from "zod";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/admin/schedules?staffId=...
  * Fetch working schedules for a specific staff member or all staff

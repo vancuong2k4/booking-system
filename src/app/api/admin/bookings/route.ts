@@ -3,6 +3,8 @@ import prisma from "@/lib/prisma";
 import { parseDateOnly } from "@/lib/date-utils";
 import { endOfDay, startOfDay } from "date-fns";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/admin/bookings
  * Retrieve bookings for Calendar Grid & Timeline, with metrics summary

@@ -3,6 +3,8 @@ import { getAvailableSlots } from "@/lib/availability";
 import { availabilityQuerySchema } from "@/lib/validations";
 import { ZodError } from "zod";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/availability
  * Query available booking time slots by date, selected service IDs, and optional staffId
