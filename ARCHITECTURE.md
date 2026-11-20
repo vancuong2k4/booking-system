@@ -233,3 +233,32 @@ Một khung giờ ứng viên $[Start_A, End_A]$ của nhân viên $E$ vào ngà
 | `GET/POST`| `/api/admin/staff` | Admin | Lấy danh sách / Thêm nhân viên |
 | `GET/PUT` | `/api/admin/schedules` | Admin | Cập nhật ca làm việc 7 ngày của nhân viên |
 | `GET` | `/api/admin/stats` | Admin | Lấy chỉ số tổng quan: Doanh thu, số lượt, tỷ lệ hủy |
+
+---
+
+## 6. KIẾN TRÚC CLIENT BOOKING FLOW (WIZARD 4 BƯỚC)
+
+- **Step 1 (Chọn Dịch vụ - `StepServices.tsx`):**
+  - Hỗ trợ chọn đơn hoặc đa dịch vụ cùng lúc.
+  - Tự động cộng dồn tổng chi phí (VND) và tổng thời lượng làm dịch vụ + buffer time thời gian thực.
+  - Hiển thị badge phân loại, thời lượng và giá tiền chuẩn xác.
+
+- **Step 2 (Chọn Chuyên viên - `StepStaff.tsx`):**
+  - Lựa chọn thợ chuyên biệt hoặc kích hoạt chế độ thông minh "Tự động sắp xếp nhân viên rảnh".
+  - Hiển thị avatar chuyên viên, vai trò (Senior Stylist, Color Master, ...) và trạng thái trực.
+
+- **Step 3 (Chọn Ngày & Giờ trống - `StepDateTime.tsx`):**
+  - Thanh cuộn chọn 14 ngày kế tiếp linh hoạt, đánh dấu thứ & ngày.
+  - Tự động gọi API `/api/availability` theo `date`, `serviceIds`, `staffId` đã chọn.
+  - Phân nhóm khung giờ trực quan: Buổi sáng (< 12:00), Buổi chiều (12:00 - 17:00), Buổi tối (>= 17:00).
+  - Tự động tính toán số lượng thợ rảnh tại mỗi slot khi chọn chế độ Auto-assign.
+
+- **Step 4 (Thông tin & Xác nhận - `StepConfirmation.tsx`):**
+  - Form thu thập Họ tên, Số điện thoại (chuẩn regex Việt Nam 10 chữ số), Ghi chú yêu cầu đặc biệt.
+  - Tích hợp `react-hook-form` kết hợp bộ kiểm duyệt `zod` schema phía Client.
+  - Bảng tổng kết chi tiết (Recap): Danh sách dịch vụ, thời gian, kỹ thuật viên, tổng tiền.
+  - Gửi request an toàn đến `POST /api/bookings` và điều hướng mượt mà sang màn hình xác nhận.
+
+- **Thanh tóm tắt nổi (Sticky Footer Bar - `BookingSummary.tsx`):**
+  - Cố định ở đáy màn hình trên mọi kích cỡ thiết bị (Mobile & Desktop).
+  - Hiển thị tóm tắt nhanh số dịch vụ, tổng thời lượng, tổng chi phí và nút chuyển bước (Next / Back).
