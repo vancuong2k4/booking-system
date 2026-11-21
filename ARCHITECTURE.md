@@ -262,3 +262,22 @@ Một khung giờ ứng viên $[Start_A, End_A]$ của nhân viên $E$ vào ngà
 - **Thanh tóm tắt nổi (Sticky Footer Bar - `BookingSummary.tsx`):**
   - Cố định ở đáy màn hình trên mọi kích cỡ thiết bị (Mobile & Desktop).
   - Hiển thị tóm tắt nhanh số dịch vụ, tổng thời lượng, tổng chi phí và nút chuyển bước (Next / Back).
+
+---
+
+## 7. KIẾN TRÚC TRANG XÁC NHẬN, TRA CỨU & HỦY LỊCH (`/booking-success`)
+
+- **Xác nhận đặt lịch (Booking Confirmation View):**
+  - Hiển thị mã đặt lịch rút gọn (8 ký tự in hoa) kèm nút sao chép mã đầy đủ vào Clipboard.
+  - Thẻ thông tin trực quan: Họ tên & SĐT khách, Ngày giờ chi tiết (định dạng tiếng Việt), Chuyên viên thực hiện, Bảng kê từng dịch vụ với thời lượng & đơn giá, Tổng thanh toán.
+  - Huy hiệu trạng thái động đồng bộ theo mã màu hệ thống (`CONFIRMED`, `PENDING`, `CHECKED_IN`, `COMPLETED`, `CANCELLED`, `NO_SHOW`).
+
+- **Quy tắc bảo mật & Hủy lịch (Customer Cancellation Rules):**
+  - Chỉ cho phép khách hàng hủy lịch khi trạng thái là `PENDING` hoặc `CONFIRMED`.
+  - Bắt buộc nhập Số điện thoại trùng khớp với số đã đăng ký khi đặt lịch để chống việc người khác biết mã lịch và hủy trái phép.
+  - Chuyển trạng thái sang `CANCELLED` ngay lập tức, giải phóng slot của nhân viên.
+
+- **Tra cứu lịch hẹn theo Số điện thoại (Phone Booking Lookup):**
+  - Khách hàng có thể tra cứu toàn bộ lịch sử hẹn chỉ bằng số điện thoại 10 số.
+  - Hiển thị danh sách thẻ kết quả gồm mã lịch, ngày giờ hẹn, danh sách dịch vụ và trạng thái hiện tại.
+  - Bấm vào bất kỳ lịch nào để xem chi tiết và thao tác hủy trực tiếp.
