@@ -281,3 +281,34 @@ Một khung giờ ứng viên $[Start_A, End_A]$ của nhân viên $E$ vào ngà
   - Khách hàng có thể tra cứu toàn bộ lịch sử hẹn chỉ bằng số điện thoại 10 số.
   - Hiển thị danh sách thẻ kết quả gồm mã lịch, ngày giờ hẹn, danh sách dịch vụ và trạng thái hiện tại.
   - Bấm vào bất kỳ lịch nào để xem chi tiết và thao tác hủy trực tiếp.
+
+---
+
+## 8. KIẾN TRÚC TRANG QUẢN TRỊ LỊCH BIỂU DẠNG LƯỚI (`/admin` - CALENDAR GRID VIEW)
+
+- **Admin Layout (`src/app/admin/layout.tsx`):**
+  - Thanh điều hướng chuyên nghiệp dành cho Lễ tân / Quản trị viên: Lịch biểu (Calendar Grid), Dịch vụ (Services), Nhân sự (Staff), Thống kê (Stats).
+  - Nút chuyển nhanh sang Giao diện Đặt lịch Khách hàng (Client Portal).
+
+- **Thẻ chỉ số KPI thời gian thực (`CalendarMetrics.tsx`):**
+  - Tổng lịch hẹn trong ngày, Đã xác nhận (`CONFIRMED`), Đang phục vụ (`CHECKED_IN`), Đã hoàn thành (`COMPLETED`).
+  - Doanh thu thực tế (các ca `COMPLETED`) và Doanh thu dự kiến trong ngày.
+  - Số lượng hủy ca / vắng mặt (`CANCELLED` + `NO_SHOW`).
+
+- **Thanh điều khiển & Bộ lọc Lịch biểu (`CalendarHeader.tsx`):**
+  - Điều hướng ngày thông minh: Nút "Hôm nay", Lùi ngày (<), Tiến ngày (>), Input chọn ngày nhanh.
+  - Lọc theo từng Chuyên viên hoặc xem toàn bộ salon.
+  - Lọc theo Trạng thái lịch hẹn kèm ký hiệu màu sắc chuẩn hóa.
+  - Nút làm mới dữ liệu tức thì (Real-time Sync).
+
+- **Lưới Lịch biểu Timeline tương tác (`CalendarGrid.tsx`):**
+  - **Trục hoành (Cột):** Cột thời gian bên trái + Cột riêng biệt cho từng Chuyên viên (kèm Avatar, Tên, Chức vụ, Giờ làm việc trong ngày).
+  - **Trục tung (Hàng):** Mốc thời gian 30 phút/hàng từ giờ mở cửa (`08:30`) đến giờ đóng cửa (`20:00`).
+  - **Khối lịch hẹn (Booking Blocks):**
+    - Vị trí và chiều cao tính toán chính xác theo phút (`top = delta_minutes * px_per_min`, `height = duration_minutes * px_per_min`).
+    - Màu sắc phân biệt trực quan theo trạng thái: Xanh ngọc (`CONFIRMED`), Xanh da trời (`CHECKED_IN`), Vàng hổ phách (`PENDING`), Xám (`COMPLETED`), Đỏ (`CANCELLED`), Cam (`NO_SHOW`).
+    - Hiển thị Tên khách, SĐT, danh sách dịch vụ, thời gian bắt đầu - kết thúc, tổng tiền.
+  - **Dải nhận diện Giờ nghỉ trưa (Lunch Break Strip):** Tự động render vùng sọc hổ phách biểu thị giờ nghỉ trưa của thợ (VD: `12:00 - 13:00`).
+  - **Nhân viên nghỉ ca (Off-day Overlay):** Hiển thị màn che xám khi thợ không có ca làm việc vào ngày được chọn.
+  - **Chỉ báo Thời gian thực (Current Time Red Line):** Vạch ngang đỏ tự động hiển thị mốc giờ hiện tại khi đang xem ngày hôm nay.
+  - **Modal xem nhanh lịch hẹn:** Bấm vào bất kỳ khối booking nào để xem chi tiết đầy đủ của đơn đặt lịch.
